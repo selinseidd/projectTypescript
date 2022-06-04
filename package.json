@@ -19,6 +19,7 @@
     "jsonwebtoken": "^8.5.1",
     "mobile-detect": "^1.4.5",
     "mongoose": "^6.3.4",
+    "node": "^12.16.3",
     "type-graphql": "^1.1.1",
     "typegoose": "^5.9.1"
   },
