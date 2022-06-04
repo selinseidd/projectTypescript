@@ -3,6 +3,19 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+type Book {
+  _id: ObjectId!
+  description: String!
+  image: String!
+  name: String!
+}
+
+input BookInput {
+  description: String!
+  image: String!
+  name: String!
+}
+
 input CreateUserInput {
   email: String!
   firstName: String!
@@ -11,6 +24,7 @@ input CreateUserInput {
 }
 
 input EditUserInput {
+  books: BookInput!
   email: String
   firstName: String
   lastName: String
@@ -18,8 +32,11 @@ input EditUserInput {
 }
 
 type Mutation {
+  createBook(data: BookInput!): Book!
   createUser(data: CreateUserInput!): User!
+  deleteBook(_id: String!): Book!
   deleteUser(_id: String!): User!
+  editBook(_id: String!, data: BookInput!): Book!
   editUser(_id: String!, data: EditUserInput!): User!
   login(email: String!, password: String!): String!
 }
@@ -28,6 +45,8 @@ type Mutation {
 scalar ObjectId
 
 type Query {
+  book(_id: String!): Book!
+  books: [Book!]!
   currentUser: User!
   user(_id: String!): User!
   users: [User!]!
@@ -35,9 +54,11 @@ type Query {
 
 type User {
   _id: ObjectId!
+  books: Book!
   email: String!
   firstName: String!
   lastLogin: Float!
   lastName: String!
   password: String!
+  roles: [String!]!
 }

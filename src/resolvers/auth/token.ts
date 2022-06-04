@@ -3,9 +3,10 @@ import {ObjectId} from "mongodb"
 import dotenv from "dotenv";
 dotenv.config();
 
-export function getToken(_id:ObjectId){
+export function getToken(_id:ObjectId, roles:string[]){
     return jsonwebtoken.sign({
         _id,
+        roles,
     },
     process.env.JWT_SECRET,
     {
