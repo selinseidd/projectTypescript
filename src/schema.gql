@@ -11,6 +11,7 @@ type Book {
 }
 
 input BookInput {
+  _id: ObjectId!
   description: String!
   image: String!
   name: String!
@@ -23,8 +24,14 @@ input CreateUserInput {
   password: String!
 }
 
+input EditBookInput {
+  description: String!
+  image: String!
+  name: String!
+}
+
 input EditUserInput {
-  books: BookInput!
+  books: [BookInput!]!
   email: String
   firstName: String
   lastName: String
@@ -32,11 +39,11 @@ input EditUserInput {
 }
 
 type Mutation {
-  createBook(data: BookInput!): Book!
+  createBook(data: EditBookInput!): Book!
   createUser(data: CreateUserInput!): User!
   deleteBook(_id: String!): Book!
   deleteUser(_id: String!): User!
-  editBook(_id: String!, data: BookInput!): Book!
+  editBook(_id: String!, data: EditBookInput!): Book!
   editUser(_id: String!, data: EditUserInput!): User!
   login(email: String!, password: String!): String!
 }

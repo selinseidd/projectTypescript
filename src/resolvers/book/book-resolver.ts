@@ -1,5 +1,5 @@
 import { Resolver,Query,Mutation, Arg, Authorized } from "type-graphql";
-import { BookInput } from "./book-arguments";
+import { EditBookInput } from "./book-arguments";
 import { Book, BookModel } from "../../entities/book-entity";
 import { UserRoles } from "../user/user_role";
 
@@ -18,7 +18,7 @@ export class BookResolver {
   }
 
   @Mutation(returns => Book)
-  async createBook(@Arg("data") data: BookInput):Promise<Book>{
+  async createBook(@Arg("data") data: EditBookInput):Promise<Book>{
     const newBook=new BookModel(data);
     await newBook.save();
     return newBook;
@@ -32,7 +32,7 @@ export class BookResolver {
   }
 
   @Mutation (returns=> Book)
-  async editBook(@Arg("_id") _id:string,@Arg("data") data:BookInput):Promise<Book>{
+  async editBook(@Arg("_id") _id:string,@Arg("data") data:EditBookInput):Promise<Book>{
 
     return await BookModel.findByIdAndUpdate(_id,data,{new:true});
   }

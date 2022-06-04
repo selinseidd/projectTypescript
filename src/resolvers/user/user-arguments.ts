@@ -1,7 +1,6 @@
 import { MaxLength, MinLength, IsEmail } from "class-validator";
 import { Field,InputType } from "type-graphql";
 import { ObjectId } from "mongodb";
-import { Book } from "../../entities/book-entity";
 import { BookInput } from "../book/book-arguments";
 
 @InputType()
@@ -42,6 +41,6 @@ export class EditUserInput {
   @MinLength(6)
   password?: string;
   
-  @Field(type => [Book])
-  books?:Book[]
+  @Field(type => [BookInput])
+  books?:BookInput[]
 }
